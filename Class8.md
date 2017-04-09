@@ -16,17 +16,23 @@
     - `right` - the node's right child, if any
     - `is_leaf` - check if the node is a leaf (has no children)
     - `is_internal` - check if the node is internal (has at least one child)
+    - `height` - return the node's height (the number of edges on the longest downward path between the node and a leaf)
 - implement `BinarySearchTree` class using `BinaryNode` objects with the following properties and instance methods using [binary search tree starter code]:
-    - `size` - property that tracks the number of nodes in constant time
+    - `root` - the tree's root node
+    - `size` - the number of nodes in the tree (can be tracked in constant time)
     - `is_empty` - check if the tree is empty
-    - `insert(data)` - insert a new node with `data` in order in the tree
-    - `search(data)` - check if a node with `data` is present in the tree
-    - `delete(data)` - remove the node with `data` from the tree
+    - `height` - return the tree's height (the number of edges on the longest path between the root node and a leaf)
+    - `contains(item)` - check if a node in this tree contains `item`
+    - `search(item)` - return a node's data in the tree matching `item`
+    - `insert(item)` - insert a new node with `item` in order into the tree
+    - `delete(item)` - remove the node with `item` from the tree, or raise ValueError
+    - `_find_node(item)` - return the node containing `item` in the tree, or None
+    - `_find_parent_node(item)` - return the parent node of where `item` is (or would be) in the tree, or None
+- run `python binarysearchtree.py` to test `BinarySearchTree` class instance methods on a small example
 - run `pytest test_binarysearchtree.py` to run the [binary search tree unit tests] and fix any failures
 - annotate all class instance methods with running time complexity analysis
 
 **Stretch Challenges:**
-- implement `TreeMap` class (map/dictionary abstract data type implemented with binary search tree data structure)
 - implement binary search tree with singly linked list nodes instead of binary tree nodes
 
 **Project:**
