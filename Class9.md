@@ -14,11 +14,22 @@
     - `items_pre_order` - return a list of all items in the tree found using pre-order traversal
     - `items_post_order` - return a list of all items in the tree found using post-order traversal
     - `items_level_order` - return a list of all items in the tree found using level-order traversal
+- run `python binarysearchtree.py` to test `BinarySearchTree` traversal instance methods on a small example
 - run `pytest test_binarysearchtree.py` to run the [binary search tree unit tests] and fix any failures
 - annotate all class instance methods with running time complexity analysis
 
 **Stretch Challenges:**
-- implement `TreeMap` class (map/dictionary abstract data type implemented with binary search tree data structure)
+- implement `TreeMap` class (map/dictionary abstract data type implemented with binary search tree data structure) with the following properties and instance methods:
+    - `keys` - return a list of all keys in the tree map
+    - `values` - return a list of all values in the tree map
+    - `items` - return a list of all entries (key-value pairs) in the tree map
+    - `contains(key)` - check if the tree map contains `key`
+    - `get(key)` - return the value associated with `key`, or raise KeyError
+    - `set(key, value)` - insert or update `key` with its associated `value`
+    - `delete(key)` - delete `key` and its associated value, or raise KeyError
+- write your own unit tests for your `TreeMap` class
+    - include test cases for each class instance method
+    - *hint:* copy and modify the `HashTable` class unit tests
 
 **Project:**
 - [trees and mazes] tutorial on Make School's [Online Academy]
