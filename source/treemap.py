@@ -73,20 +73,20 @@ class TreeMap(object):
 
     def keys(self):
         """Return a list of all keys in this tree map in order"""
-        # TODO: Get all entries from the tree in order and filter only the keys
-        ...
-        return ...
+        # Get all entries from the tree in order and filter only the keys
+        entries = self.tree.items_in_order()
+        return map(lambda (key, value): key, entries)
 
     def values(self):
         """Return a list of all values in this tree map in order by key"""
-        # TODO: Get all entries from the tree in order and filter only the values
-        ...
-        return ...
+        # Get all entries from the tree in order and filter only the values
+        entries = self.tree.items_in_order()
+        return map(lambda (key, value): value, entries)
 
     def items(self):
         """Return a list of all entries (key-value pairs) in this tree map in order by key"""
-        # TODO: Get all entries from the tree in order
-        return ...
+        # Get all entries from the tree in order
+        return self.tree.items_in_order()
 
     def contains(self, key):
         """Return True if this tree map contains the given key, or False"""
@@ -98,10 +98,10 @@ class TreeMap(object):
         # Search the tree for an entry with the given key, if one exists
         entry = self.tree.search(KeyMatcher(key))
         if entry is not None:  # Found
-            # TODO: Return the given key's associated value
+            # Return the given key's associated value
             assert isinstance(entry, tuple)
             assert len(entry) == 2
-            return ...
+            return entry[1]
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
@@ -111,18 +111,21 @@ class TreeMap(object):
         entry = self.tree.search(KeyMatcher(key))
         if entry is not None:  # Found
             # In this case, the given key's value is being updated
-            # TODO: Remove the old key-value entry from the tree first
-            ...
-        # TODO: Insert the new key-value entry into the tree in either case
-        ...
+            # Remove the old key-value entry from the tree first
+            self.tree.delete(entry)
+            self.size -= 1
+        # Insert the new key-value entry into the tree in either case
+        self.tree.insert((key, value))
+        self.size += 1
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError"""
         # Search the tree for an entry with the given key, if one exists
         entry = self.tree.search(KeyMatcher(key))
         if entry is not None:  # Found
-            # TODO: Remove the key-value entry from the tree
-            ...
+            # Remove the key-value entry from the tree
+            self.tree.delete(entry)
+            self.size -= 1
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
