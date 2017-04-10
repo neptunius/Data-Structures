@@ -19,7 +19,7 @@
 - annotate all class instance methods with running time complexity analysis
 
 **Stretch Challenges:**
-- implement `TreeMap` class (map/dictionary abstract data type implemented with binary search tree data structure) with the following properties and instance methods:
+- implement `TreeMap` class (map/dictionary abstract data type implemented with binary search tree data structure) with the following properties and instance methods using [tree map starter code]:
     - `keys` - return a list of all keys in the tree map
     - `values` - return a list of all values in the tree map
     - `items` - return a list of all entries (key-value pairs) in the tree map
@@ -27,9 +27,9 @@
     - `get(key)` - return the value associated with `key`, or raise KeyError
     - `set(key, value)` - insert or update `key` with its associated `value`
     - `delete(key)` - delete `key` and its associated value, or raise KeyError
-- write your own unit tests for your `TreeMap` class
-    - include test cases for each class instance method
-    - *hint:* copy and modify the `HashTable` class unit tests
+- run `python treemap.py` to test `TreeMap` class instance methods on a small example
+- run `pytest test_treemap.py` to run the [tree map unit tests] and fix any failures
+- annotate all class instance methods with running time complexity analysis
 
 **Project:**
 - [trees and mazes] tutorial on Make School's [Online Academy]
@@ -42,6 +42,8 @@
 
 [binary search tree starter code]: source/binarysearchtree.py
 [binary search tree unit tests]: source/test_binarysearchtree.py
+[tree map starter code]: source/treemap.py
+[tree map unit tests]: source/test_treemap.py
 
 [trees and mazes]: http://make.sc/oa-trees-and-mazes
 [Online Academy]: https://www.makeschool.com/academy
