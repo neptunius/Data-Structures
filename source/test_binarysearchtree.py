@@ -89,6 +89,12 @@ class TestBinarySearchTree(unittest.TestCase):
         assert bst.size == 2
         bst.insert('C')
         assert bst.size == 3
+        # bst.delete('A')
+        # assert bst.size == 2
+        # bst.delete('C')
+        # assert bst.size == 1
+        # bst.delete('B')
+        # assert bst.size == 0
 
     def test_search_with_3_items(self):
         # Create a complete binary search tree of 3 items in level-order
@@ -153,6 +159,40 @@ class TestBinarySearchTree(unittest.TestCase):
         assert bst.root.left.right.data == 3
         assert bst.root.right.left.data == 5
         assert bst.root.right.right.data == 7
+
+    def DISABLED_test_delete(self):
+        bst = BinarySearchTree([10, 5, 1, 8, 15, 11, 18])
+
+        bst.delete(18)
+        assert bst.root.key == 10
+        assert bst.root.left.key == 5
+        assert bst.root.left.left.key == 1
+        assert bst.root.left.right.key == 8
+        assert bst.root.right.key == 15
+        assert bst.root.right.left.key == 11
+        assert bst.root.right.right == None
+        assert bst.search(18) == False
+
+        bst = BinarySearchTree([10, 5, 1, 8, 15, 11, 18])
+        bst.delete(15)
+        assert bst.root.key == 10
+        assert bst.root.left.key == 5
+        assert bst.root.left.left.key == 1
+        assert bst.root.left.right.key == 8
+        assert bst.root.right.key == 11
+        assert bst.root.right.right.key == 18
+        assert bst.root.right.left == None
+        assert bst.search(15) == False
+
+        bst = BinarySearchTree([10, 5, 1, 8, 15, 11, 18])
+        bst.delete(10)
+        assert bst.root.key == 8
+        assert bst.root.left.key == 5
+        assert bst.root.left.left.key == 1
+        assert bst.root.left.right == None
+        assert bst.root.right.key == 15
+        assert bst.root.right.right.key == 18
+        assert bst.root.right.left.key == 11
 
     def test_items_in_order(self):
         # Create a complete binary search tree of 7 items in level-order

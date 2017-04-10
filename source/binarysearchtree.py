@@ -143,6 +143,127 @@ class BinarySearchTree(object):
         # Increase the tree size
         self.size += 1
 
+    def delete(self, item):
+        """Delete the given item from this binary search tree,
+        or raise ValueError if this tree does not contain the given item"""
+        # return
+        if self.root is None:
+            raise ValueError("Cannot delete from empty tree")
+
+        # Find the node to delete and it's parent node
+        parent = self.root
+        node = self.root
+        while node is not None:
+            if item == node.data:
+                break
+            elif item > node.data:
+                parent = node
+                node = node.right
+            else:
+                parent = node
+                node = node.left
+
+        # Assert ValueError if the node was not found
+        if node is None:
+            raise ValueError("Item not found in tree: {}".format(item))
+
+        # Delete the item
+        if node.left is not None:
+            rightmost, rightmost_parent = self._rightmost_node_and_parent(node.left)
+            rightmost_parent.right = rightmost.left
+
+            if node == self.root:
+                self._reassign_root(rightmost)
+                self.size -= 1
+                return
+
+            rightmost.right = node.right
+            if node.data > parent.data:
+                parent.right = rightmost
+            else:
+                parent.left = rightmost
+
+        elif node.right is not None:
+            leftmost, leftmost_parent = self._leftmost_node_and_parent(node.right)
+            leftmost_parent.left = leftmost.right
+
+            if node == self.root:
+                self._reassign_root(leftmost)
+                self.size -= 1
+                return
+
+            leftmost.left = node.left
+            if node.data > parent.data:
+                parent.right = leftmost
+            else:
+                parent.left = leftmost
+
+        else:
+            if node.data == parent.data: # self.root
+                self.root = None
+            elif node.data > parent.data:
+                parent.right = None
+            else:
+                parent.left = None
+
+        self.size -= 1
+
+    def _reassign_root(self, new_node):
+        new_node.right = self.root.right
+        new_node.left = self.root.left
+        self.root = new_node
+
+    def _leftmost_node_and_parent(self, start_node):
+        """Return a tuple containing the leftmost node in the subtree rooted at
+        the given node and its parent node""" # or the same if it's the given node"""
+        parent = start_node
+        node = start_node
+        while node.left is not None:
+            parent = node
+            node = node.left
+        return (node, parent)
+
+    def _rightmost_node_and_parent(self, start_node):
+        """Find the rightmost node in the subtree"""
+        parent = start_node
+        node = start_node
+        while node.right is not None:
+            parent = node
+            node = node.right
+        return (node, parent)
+
+    # def find_smallest(self):
+    #     if self.root is None:
+    #         return None
+    #
+    #     node = self.root
+    #     while node.left is not None:
+    #         node = node.left
+    #
+    #     return node.data
+    #
+    # def delete_smallest(self):
+    #     if self.root is None:
+    #         raise ValueError("Cannot delete from empty tree")
+    #
+    #     # Find the node to delete and it's parent node
+    #     parent = self.root
+    #     node = self.root
+    #     while node.left is not None:
+    #         parent = node
+    #         node = node.left
+    #
+    #     if node == self.root:
+    #         item = self.root.data
+    #         self.root = node.right
+    #         self.size -= 1
+    #         return item
+    #
+    #     parent.left = node.left
+    #     parent.right = node.right
+    #     self.size -= 1
+    #     return node.data
+
     def items_in_order(self, node=None, items=None):
         """Return a list of all items in this binary search tree found using
         in-order traversal starting at the given node after the given items"""
@@ -262,6 +383,12 @@ def test_binary_search_tree():
     print('items pre-order:   ' + str(bst.items_pre_order()))
     print('items post-order:  ' + str(bst.items_post_order()))
     print('items level-order: ' + str(bst.items_level_order()))
+
+    # print('\nDeleting items:')
+    # for item in items:
+    #     bst.delete(item)
+    #     print('delete({}), size: {}'.format(item, bst.size))
+    # print('root: ' + str(bst.root))
 
 
 if __name__ == '__main__':
