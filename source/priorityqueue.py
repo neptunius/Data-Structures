@@ -25,8 +25,8 @@ class PriorityQueue(object):
     def enqueue(self, item, priority):
         """Insert the given item into this priority queue in order according to
         the given priority."""
-        # TODO: Insert given item into heap
-        ...
+        # Insert given item into heap
+        self.heap.insert((priority, item))
 
     def front(self):
         """Return the item at the front of this priority queue without removing
@@ -34,8 +34,8 @@ class PriorityQueue(object):
         if self.size() < 1:
             return None
         else:
-            # TODO: Return min item from heap, if any
-            ...
+            # Return min item from heap, if any
+            return self.heap.get_min()
 
     def dequeue(self):
         """Remove and return the item at the front of this priority queue,
@@ -43,8 +43,8 @@ class PriorityQueue(object):
         if self.size() < 1:
             raise ValueError('Priority queue is empty and has no front item')
         else:
-            # TODO: Remove and return min item from heap, if any
-            ...
+            # Remove and return min item from heap, if any
+            return self.heap.remove_min()
 
     def push_pop(self, item, priority):
         """Remove and return the item at the front of this priority queue,
@@ -52,5 +52,5 @@ class PriorityQueue(object):
         if self.size() < 1:
             raise ValueError('Priority queue is empty and has no front item')
         else:
-            # TODO: Replace and return min item from heap, if any
-            ...
+            # Replace and return min item from heap, if any
+            return self.replace_min((priority, item))
